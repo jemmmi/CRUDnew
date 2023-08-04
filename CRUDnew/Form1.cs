@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CRUDnew
@@ -94,7 +95,7 @@ namespace CRUDnew
                     DataTable dtData = new DataTable();
                     sqlCmd = new SqlCommand("spStaff", sqlCon);
                     sqlCmd.CommandType = CommandType.StoredProcedure;
-                    sqlCmd.Parameters.AddWithValue("@ActionType", actionType);
+                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveData");
                     sqlCmd.Parameters.AddWithValue("@Staff_id", Staff_id);
                     sqlCmd.Parameters.AddWithValue("@Name", tb_name.Text);
                     sqlCmd.Parameters.AddWithValue("@City", tb_city.Text);
@@ -315,7 +316,7 @@ namespace CRUDnew
                 //}
                 for (int i = 0; i < dtData.Rows.Count; i++)
                 {
-                    if (tb_ph.Text == dtData.Rows[i]["PhoneNo"].ToString())
+                    if (tb_ph.Text == dtData.Rows[i]["PhoneNo"].ToString() && tb_name.Text ==dtData.Rows[i]["Name"].ToString())
                     {
                         MessageBox.Show("Number already EXIST");
                         return;
